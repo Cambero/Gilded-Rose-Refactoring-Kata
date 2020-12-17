@@ -1,4 +1,6 @@
-# Gilded Rose Requirements Specification
+# Gilded Rose Refactoring Kata
+
+## Gilded Rose Requirements Specification
 
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a
 prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.
@@ -35,5 +37,4 @@ for you).
 Just for clarification, an item can never have its Quality increase above 50, however "Sulfuras" is a
 legendary item and as such its Quality is 80 and it never alters.
 
-
-forked from [emilybache/GildedRose-Refactoring-Kata](https://github.com/emilybache/GildedRose-Refactoring-Kata)
+[![BCH compliance](https://bettercodehub.com/edge/badge/Cambero/Gilded-Rose-Refactoring-Kata?branch=main)](https://bettercodehub.com/)
