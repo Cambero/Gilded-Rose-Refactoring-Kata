@@ -1,55 +1,43 @@
 class GildedRose
+  AGED_BRIE = 'Aged Brie'
+  BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'
+  SULFURAS = 'Sulfuras, Hand of Ragnaros'
 
   def initialize(items)
     @items = items
   end
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
-          end
-        end
+      next if item.name == SULFURAS
+
+      decrease_sell_in(item)
+      expired = item.sell_in.negative?
+
+      case item.name
+      when AGED_BRIE
+        update_item_quality(item, 1)
+        update_item_quality(item, 1) if expired
+      when BACKSTAGE
+        update_item_quality(item, 1)
+        update_item_quality(item, 1) if item.sell_in < 10
+        update_item_quality(item, 1) if item.sell_in < 5
+        update_item_quality(item, -item.quality) if expired
       else
-        if item.quality < 50
-          item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-          end
-        end
-      end
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
-      if item.sell_in < 0
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
-              end
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
-        else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
+        update_item_quality(item, -1)
+        update_item_quality(item, -1) if expired
       end
     end
+  end
+
+  private
+
+  def update_item_quality(item, quantity)
+    item.quality = (item.quality + quantity).clamp(0, 50)
+  end
+
+  def decrease_sell_in(item)
+    item.sell_in = item.sell_in - 1
   end
 end
 
