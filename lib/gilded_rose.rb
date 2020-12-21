@@ -2,6 +2,7 @@ class GildedRose
   AGED_BRIE = 'Aged Brie'
   BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert'
   SULFURAS = 'Sulfuras, Hand of Ragnaros'
+  CONJURED = 'Conjured Mana Cake'
 
   def initialize(items)
     @items = items
@@ -21,6 +22,8 @@ class GildedRose
       ItemBackstageUpdater.new(item).update
     when SULFURAS
       ItemSulfurasUpdater.new(item).update
+    when CONJURED
+      ItemConjuredUpdater.new(item).update
     else
       ItemUpdater.new(item).update
     end
@@ -104,3 +107,10 @@ class ItemBackstageUpdater < ItemUpdater
   end
 end
 
+class ItemConjuredUpdater < ItemUpdater
+  private
+
+  def quality_delta
+    super * 2
+  end
+end

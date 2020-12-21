@@ -12,7 +12,7 @@ items = [
   Item.new('Backstage passes to a TAFKAL80ETC concert', 10, 49),
   Item.new('Backstage passes to a TAFKAL80ETC concert', 5, 49),
   # This Conjured item does not work properly yet
-  Item.new('Conjured Mana Cake', 3, 6) # <-- :O
+  Item.new('Conjured Mana Cake', 3, 6)
 ]
 
 days = 100
